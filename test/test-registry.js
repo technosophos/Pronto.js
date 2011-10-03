@@ -24,3 +24,17 @@ assert.ok(pronto.register.config.requests['bar'] != undefined, 'Request should h
 assert.equal(2, pronto.register.config.requests.bar.length, 'Request should have one command.');
 assert.equal('test-command2', c.requests.bar[1].name, 'Command name should be properly set.');
 assert.equal(common.TestCommand, c.requests.bar[0].command, 'Check that command is correct.');
+
+
+pronto.register.request('withArgs')
+	.doesCommand('test-command').whichInvokes(common.TestCommand)
+		.withParam('myParam').withValue('test value')
+	.doesCommand('test-command2').whichInvokes(common.TestCommand)
+		.withParam('myParam').withDefault('test value2')
+	.doesCommand('test-command3').whichInvokes(common.TestCommand)
+		.withParam('myParam').from('cxt:test-command')
+;
+
+assert.equal('test value', c.requests.withArgs[0].params.myParam, 'Test that default value is set.');
+assert.equal('test value2', c.requests.withArgs[1].params.myParam, 'Test that default value is set.');
+assert.equal('cxt:test-command', c.requests.withArgs[2].from, 'Test that from is set.');

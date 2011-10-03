@@ -25,7 +25,7 @@ assert.equal(2, pronto.register.config.requests.bar.length, 'Request should have
 assert.equal('test-command2', c.requests.bar[1].name, 'Command name should be properly set.');
 assert.equal(common.TestCommand, c.requests.bar[0].command, 'Check that command is correct.');
 
-
+// Test setting values for params.
 pronto.register.request('withArgs')
 	.doesCommand('test-command').whichInvokes(common.TestCommand)
 		.withParam('myParam').withValue('test value')

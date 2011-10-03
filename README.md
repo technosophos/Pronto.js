@@ -1,4 +1,4 @@
-# Pronto
+# Pronto.js
 
 Pronto is a Node.js library for creating simple, command-based applications.
 

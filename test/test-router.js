@@ -26,6 +26,7 @@ router.on('exec', function (spec, context) {
 	execWasFired = true;
 });
 
+// This should have fired when the chain completed.
 var doneWasFired = false;
 router.on('done', function (context) {
 	assert.ok(context instanceof pronto.Context);
@@ -33,7 +34,24 @@ router.on('done', function (context) {
 	doneWasFired = true;
 });
 
+// This should have bubbled up from the command(s)
+var commandContinueFired = false;
+router.on('commandContinue', function(spec, cxt) {
+	assert.ok(cxt instanceof pronto.Context, 'Make sure continue event got right args.');
+	commandContinueFired = true;
+})
+
 router.handleRequest('foo');
 
 assert.ok(execWasFired, '"exec" event must be executed.');
 assert.ok(doneWasFired, '"done" event must be executed.');
+assert.ok(commandContinueFired, '"commandContinue" event executed at least once.');
+
+pronto.register.request('failure').doesCommand('fails').whichInvokes(common.FailingCommand);
+
+router = new pronto.Router();
+//router.on('error', console.log('Found error.'));
+assert.throws(function() {router.handleRequest('failure')}, /I feel sick/, "Catch error event");
+
+// Test a failed route:
+assert.throws(function() {router.handleRequest('NoSuchRequest')}, /Request not found/, 'Catch not found error');

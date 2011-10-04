@@ -1,6 +1,7 @@
 util = require('util');
 pronto = require('../lib/pronto');
 exports.TestCommand = TestCommand;
+exports.FailingCommand = FailingCommand;
 
 
 // FIXTURE: Simple test command.
@@ -16,4 +17,10 @@ TestCommand.prototype.execute = function(cxt, params) {
 	this.cxt.add(this.name, 'ok');
 	
 	this.done();
+}
+
+function FailingCommand() {}
+util.inherits(FailingCommand, pronto.Command);
+FailingCommand.prototype.execute = function(cxt, params) {
+	this.emit('error', new Error('I feel sick.'));
 }

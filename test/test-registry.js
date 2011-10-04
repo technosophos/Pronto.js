@@ -3,7 +3,7 @@ var pronto = require('../lib/pronto.js');
 var assert = require('assert');
 
 var c = pronto.register.config;
-console.log('running...');
+
 // Register just a request. CANARY. Remove this, as it is testing an invalid state.
 pronto.register.request('foo');
 assert.ok(c.requests['foo'] != undefined, 'Request should have been created.');

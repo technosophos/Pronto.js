@@ -27,9 +27,11 @@ Pronto works by taking a request from the client and responding by executing a l
 
 Pronto provides a fluent interface for declaring your task list. Here is a simple example:
 
+```javascript
     pronto.register.request('hello')
       .doesCommand('print-hello')
       .whichInvokes(HelloCommand);
+```
 
 The above registers a single request (`hello`). Executing the `hello` request will execute a single task (`print-hello`).
 

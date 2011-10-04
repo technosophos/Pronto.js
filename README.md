@@ -24,17 +24,17 @@ The above creates a new instance of the `pronto` toolkit and registers a single 
 
 Creating a task is as simple as extending the base task prototype, implementing just a method or two:
 
-  // Constructor
-  function HelloCommand() {}
+    // Constructor
+    function HelloCommand() {}
 
-  // Inherit prototype
-  util.inherits(HelloCommand, pronto.Command);
+    // Inherit prototype
+    util.inherits(HelloCommand, pronto.Command);
 
-  // Override the execute() method.
-  HelloCommand.prototype.execute = function(context, params) {
-    console.log('Hello World');
-    this.done();
-  }
+    // Override the execute() method.
+    HelloCommand.prototype.execute = function(context, params) {
+      console.log('Hello World');
+      this.done();
+    }
 
 The above simply prints `Hello World` to the console.
 

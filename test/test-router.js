@@ -34,6 +34,7 @@ router.on('done', function (context) {
 	doneWasFired = true;
 });
 
+// Test event routing.
 // This should have bubbled up from the command(s)
 var commandContinueFired = false;
 router.on('commandContinue', function(spec, cxt) {
@@ -47,15 +48,13 @@ assert.ok(execWasFired, '"exec" event must be executed.');
 assert.ok(doneWasFired, '"done" event must be executed.');
 assert.ok(commandContinueFired, '"commandContinue" event executed at least once.');
 
+// Test the error handling.
 pronto.register.request('failure').doesCommand('fails').whichInvokes(common.FailingCommand);
 
 router = new pronto.Router();
-//router.on('error', console.log('Found error.'));
 assert.throws(function() {router.handleRequest('failure')}, /I feel sick/, "Catch error event");
 
 // Test a failed route:
 var wasNotFoundFired = false;
 router.on('error', function() { wasNotFoundFired = true; });
 router.handleRequest('NOTFOUND');
-//assert.ok(wasNotFoundFired, 'Failed request was caught.');
-//assert.throws(function() {router.handleRequest('NoSuchRequest')}, /Request not found/, 'Catch not found error');

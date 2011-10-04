@@ -35,6 +35,7 @@ The above registers a single request (`hello`). Executing the `hello` request wi
 
 More often than not, a request should execute multiple commands in a row, systematically assembling data and returning it only at the end. For example, a simple search engine request might look like this:
 
+```javascript
     pronto.register.request('search')
       .doesCommand('initialization')
         .whichInvokes(InitializeSearchService)
@@ -45,6 +46,7 @@ More often than not, a request should execute multiple commands in a row, system
         .whichInvokes(SearchTheme)
         .usesParam('searchResults').from('cxt:do-search')
     ;
+```
 
 The example above declares a request with three commands: `initialization`, `do-search`, and `format-search-results`. In this hypothetical request, we have broken down the task of searching into three steps.
 
@@ -66,6 +68,7 @@ Creating a command is as simple as extending the base task prototype, implementi
 
 When Pronto encounters this command in a chain, it will run the the command's `execute()` method.
 
+```javascript
     // Constructor
     function HelloCommand() {}
 
@@ -77,6 +80,7 @@ When Pronto encounters this command in a chain, it will run the the command's `e
       console.log('Hello World');
       this.done();
     }
+```
 
 The above simply prints `Hello World` to the console.
 

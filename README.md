@@ -24,12 +24,14 @@ The above creates a new instance of the `pronto` toolkit and registers a single 
 
 Creating a task is as simple as extending the base task prototype, implementing just a method or two:
 
+## Development Status
 
+Pronto is currently pre-release. We will add `npm` packages as soon as it stabilizes.
 
 ## Acknowledgements
 
-Tom Derykere coined the name for this module.
-Alex Daw and Sam Boyer provided input at the outset.
-Some of the patterns are derived from [Fortissimo](http://github.com/technosophos/Fortissimo).
+* Tom Derykere coined the name for this module.
+* Alex Daw and Sam Boyer provided input at the outset.
+* Some of the patterns are derived from [Fortissimo](http://github.com/technosophos/Fortissimo).
 
 This project was sponsored by [ConsumerSearch.com](http://www.consumersearch.com), part of the About.Com network, a New York Times company.

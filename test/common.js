@@ -16,7 +16,7 @@ TestCommand.prototype.execute = function(cxt, params) {
 	
 	this.cxt.add(this.name, 'ok');
 	
-	this.done();
+	//this.done();
 }
 
 function FailingCommand() {}

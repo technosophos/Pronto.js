@@ -75,3 +75,17 @@ router.once('done', function(cxt) {
 })
 router.handleRequest('foo3');
 assert.ok(doneFired, 'Done event should fire on request completion.');
+
+// Test passing a context into router:
+register.request('testContext').does(common.TestCommand, 'testCmd').using('foo').from('get:q');
+var cxt2 = new pronto.Context();
+cxt2.addDatasource('get', {'q': 1234});
+testContextFired = false;
+router.once('done', function(cxt) {
+	testContextFired = true;
+	assert.equal(1234, cxt2.get('testCmd-params').foo);
+})
+
+router.handleRequest('testContext', cxt2);
+assert.ok(testContextFired, 'Context test fired.');
+

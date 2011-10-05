@@ -59,3 +59,6 @@ cxt.add('FOO', 1234);
 assert.equal(1234, clist.resolveFromSpec('c:FOO', cxt));
 assert.equal(1234, clist.resolveFromSpec('cxt:FOO', cxt));
 assert.equal(1234, clist.resolveFromSpec('context:FOO', cxt));
+
+cxt.addDatasource('get', {'test': 4321});
+assert.equal(4321, clist.resolveFromSpec('get:test', cxt));

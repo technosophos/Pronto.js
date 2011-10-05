@@ -2,18 +2,17 @@ var common = require('./common');
 var pronto = require('../lib/pronto.js');
 var assert = require('assert');
 
+var register = new pronto.Registry();
+
 // Register two commands
-pronto.register.request('foo')
-	.doesCommand('test-command')
-	.whichInvokes(common.TestCommand)
-;
+register.request('foo').does(common.TestCommand,'test-command');
 
 // Canary:
-var spec = pronto.register.getRequestSpec('foo');
+var spec = register.getRequestSpec('foo');
 assert.ok(spec, 'Spec must exist.');
 
 // Construct a router:
-var router = new pronto.Router();
+var router = new pronto.Router(register);
 
 // Test the resolver. Normally, this is done internally.
 var rname = router.resolveRequest('foo');
@@ -49,9 +48,9 @@ assert.ok(doneWasFired, '"done" event must be executed.');
 assert.ok(commandContinueFired, '"commandContinue" event executed at least once.');
 
 // Test the error handling.
-pronto.register.request('failure').doesCommand('fails').whichInvokes(common.FailingCommand);
+register.request('failure').does(common.FailingCommand, 'fails');
 
-router = new pronto.Router();
+router = new pronto.Router(register);
 assert.throws(function() {router.handleRequest('failure')}, /I feel sick/, "Catch error event");
 
 // Test a failed route:

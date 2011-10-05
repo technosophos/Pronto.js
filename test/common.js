@@ -14,6 +14,9 @@ TestCommand.prototype.execute = function(cxt, params) {
 	this.cxt = cxt;
 	this.params = params;
 	
+	// Add params into context for testing later.
+	this.cxt.add(this.name + '-params', params);
+	
 	this.cxt.add(this.name, 'ok');
 	
 	//this.done();

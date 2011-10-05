@@ -2,12 +2,11 @@ var common = require('./common');
 var pronto = require('../lib/pronto.js');
 var assert = require('assert');
 
-pronto.register.request('foo')
-	.doesCommand('test-command')
-	.whichInvokes(common.TestCommand)
-;
+var register = new pronto.Registry();
 
-var spec = pronto.register.getRequestSpec('foo');
+register.request('foo').does(common.TestCommand, 'test-command');
+
+var spec = register.getRequestSpec('foo');
 
 // Canary:
 assert.ok(spec, 'Request spec must exist and be non-null.');
@@ -31,13 +30,13 @@ clist.run(cxt);
 assert.equal('ok', cxt.get('test-command'), 'Assert that test command returned correctly.');
 
 // Now try again with two commands, which will force execNext() to run.
-pronto.register.request('foo2')
-	.doesCommand('test-command').whichInvokes(common.TestCommand)
-	.doesCommand('test-command2').whichInvokes(common.TestCommand)
+register.request('foo2')
+	.does(common.TestCommand,'test-command')
+	.does(common.TestCommand, 'test-command2')
 ;
 
 // Canary test on new spec.
-spec = pronto.register.getRequestSpec('foo2');
+spec = register.getRequestSpec('foo2');
 assert.ok(spec, "Spec should be valid");
 
 clist = new pronto.CommandList('foo2', spec);

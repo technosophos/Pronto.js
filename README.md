@@ -28,25 +28,22 @@ Pronto works by taking a request from the client and responding by executing a l
 Pronto provides a fluent interface for declaring your task list. Here is a simple example:
 
 ```javascript
-    pronto.register.request('hello')
-      .doesCommand('print-hello')
-      .whichInvokes(HelloCommand);
+    var register = new pronto.Registry();
+    register.request('hello')
+      .doesCommand(HelloCommand, 'print-hello');
 ```
 
-The above registers a single request (`hello`). Executing the `hello` request will execute a single task (`print-hello`).
+The above registers a single request (`hello`). Executing the `hello` request will execute the task `HelloCommand`, named `print-hello`.
 
-More often than not, a request should execute multiple commands in a row, systematically assembling data and returning it only at the end. For example, a simple search engine request might look like this:
+More often than not, a request executes multiple commands in a row, systematically assembling data and returning it only at the end. For example, a simple search engine request might look like this:
 
 ```javascript
-    pronto.register.request('search')
-      .doesCommand('initialization')
-        .whichInvokes(InitializeSearchService)
-      .doesCommand('do-search')
-        .whichInvokes(QueryRemoteSearchService)
-        .usesParam('query').from('get:q')
-      .doesCommand('format-search-results')
-        .whichInvokes(SearchTheme)
-        .usesParam('searchResults').from('cxt:do-search')
+    register.request('search')
+      .does(InitializeSearchService, 'initialization')
+      .does(QueryRemoteSearchService, 'do-search')
+        .uses('query').from('get:q')
+      .does(SearchTheme, 'format-search-results')
+        .uses('searchResults').from('cxt:do-search')
     ;
 ```
 

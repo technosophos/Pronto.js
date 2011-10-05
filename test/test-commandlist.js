@@ -13,6 +13,7 @@ assert.ok(spec, 'Request spec must exist and be non-null.');
 assert.equal(1, spec.length, 'There should be only one request.');
 assert.equal('test-command', spec[0].name, 'Name of first command should be "test-command"');
 
+// Test a command list
 var clist = new pronto.CommandList('foo', spec);
 
 assert.ok(!clist.next().hasNext(), 'Should only be one command.');
@@ -21,6 +22,7 @@ assert.ok(!clist.next().hasNext(), 'Should only be one command.');
 clist.rewind();
 assert.equal(0, clist.position);
 
+// Test that there is a TestCommand in first command
 assert.ok(clist.current().command == common.TestCommand, "First command should be a TestCommand.");
 
 var cxt = new pronto.Context();
@@ -50,3 +52,10 @@ clist.run(cxt);
 // Check that all commands are run.
 assert.equal('ok', cxt.get('test-command'), 'Assert that first test command returned correctly.');
 assert.equal('ok', cxt.get('test-command2'), 'Assert that second test command returned correctly.');
+
+
+//Test from-resolver
+cxt.add('FOO', 1234);
+assert.equal(1234, clist.resolveFromSpec('c:FOO', cxt));
+assert.equal(1234, clist.resolveFromSpec('cxt:FOO', cxt));
+assert.equal(1234, clist.resolveFromSpec('context:FOO', cxt));

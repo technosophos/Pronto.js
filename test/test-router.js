@@ -57,3 +57,21 @@ assert.throws(function() {router.handleRequest('failure')}, /I feel sick/, "Catc
 var wasNotFoundFired = false;
 router.on('error', function() { wasNotFoundFired = true; });
 router.handleRequest('NOTFOUND');
+
+// Test that params are passed from Router into the request:
+var doneFired = false;
+register.request('foo3')
+	.does(common.TestCommand, 'test-command')
+		.using('foo', 'bar')
+		.using('foo2', 'bar2');
+router.setRegistry(register);
+
+router.once('done', function(cxt) {
+	doneFired = true;
+	//console.log(cxt);
+	assert.ok(cxt.get('test-command-params'), 'Should be a context');
+	assert.equal('bar', cxt.get('test-command-params').foo);
+	assert.equal('bar2', cxt.get('test-command-params').foo2);
+})
+router.handleRequest('foo3');
+assert.ok(doneFired, 'Done event should fire on request completion.');

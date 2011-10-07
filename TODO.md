@@ -2,6 +2,7 @@ TODO:
 
 Router:
 
+- Add @route internal routes
 - Add route parsing.
 
 Registry:

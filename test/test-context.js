@@ -27,3 +27,12 @@ assert.equal(2, cxt.length);
 var list = cxt.getAll();
 assert.ok(list.foo2 != undefined, 'Keys should exist');
 assert.equal(list.foo, 'bar', 'Key should have original value.');
+
+// Test logger
+var sb = '';
+var sbLogger = function(msg, level) {
+	sb += level + ':' + msg;
+}
+cxt.setLogger(sbLogger);
+cxt.log('test msg', 'level');
+assert.equal('level:test msg', sb);

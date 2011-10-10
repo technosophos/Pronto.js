@@ -9,6 +9,10 @@ register
 	.does('../lib/commands/HTTPResponse', 'out')
 	.using('body', 'This is a test.')
 
+.request('/test/*/test')
+	.does('../lib/commands/HTTPResponse', 'out')
+	.using('body', 'This is a test.').from('path:1')
+
 .request('/fail')
 	.does(FAIL, 'out')
 	.using('body', 'This is a test.')
@@ -25,3 +29,5 @@ var cxt = new pronto.Context();
 cxt.add('base-item', 'test');
 
 pronto.HTTPServer.createServer(register, cxt).listen(8000, 'localhost');
+
+//require('repl').start().context.register = register;

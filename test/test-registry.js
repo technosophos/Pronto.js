@@ -42,6 +42,12 @@ assert.equal('test value', register.config.requests.withArgs[0].params.myParam.v
 assert.equal('test value2', register.config.requests.withArgs[1].params.myParam.value, 'Test that default value is set.');
 assert.equal('cxt:test-command', register.config.requests.withArgs[2].params.myParam.from, 'Test that from is set.');
 
+// Test getAllRequests
+var allRequests = register.getAllRequests();
+var allRequestKeys = Object.keys(allRequests);
+assert.equal(2, allRequestKeys.length);
+assert.equal('bar', allRequestKeys[0]);
+
 // Also test that the getRequestSpec() function works:
 var spec = register.getRequestSpec('withArgs');
 assert.ok(spec, 'Spec should exist.');

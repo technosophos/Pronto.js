@@ -16,7 +16,8 @@ assert.equal('test-command', spec[0].name, 'Name of first command should be "tes
 // Test a command list
 var clist = new pronto.CommandList('foo', spec);
 
-assert.ok(!clist.next().hasNext(), 'Should only be one command.');
+clist.next()
+assert.ok(!clist.hasNext(), 'Should only be one command.');
 
 // Rewind and start again.
 clist.rewind();
@@ -42,7 +43,8 @@ spec = register.getRequestSpec('foo2');
 assert.ok(spec, "Spec should be valid");
 
 clist = new pronto.CommandList('foo2', spec);
-assert.ok(clist.next().current().command == common.TestCommand, "Second command should be a TestCommand.");
+clist.next();
+assert.ok(clist.current().command == common.TestCommand, "Second command should be a TestCommand.");
 clist.rewind();
 
 cxt = new pronto.Context();

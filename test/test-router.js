@@ -76,9 +76,9 @@ router.setRegistry(register);
 router.once('commandListComplete', function(cxt) {
 	doneFired = true;
 	//console.log(cxt);
-	assert.ok(cxt.get('test-command-params'), 'Should be a context');
-	assert.equal('bar', cxt.get('test-command-params').foo);
-	assert.equal('bar2', cxt.get('test-command-params').foo2);
+	assert.ok(cxt.get('params-test-command'), 'Should be a context');
+	assert.equal('bar', cxt.get('params-test-command').foo);
+	assert.equal('bar2', cxt.get('params-test-command').foo2);
 })
 router.handleRequest('foo3');
 assert.ok(doneFired, 'commandListComplete event should fire on request completion.');
@@ -90,7 +90,7 @@ cxt2.addDatasource('get', {'q': 1234});
 testContextFired = false;
 router.once('commandListComplete', function(cxt) {
 	testContextFired = true;
-	assert.equal(1234, cxt2.get('testCmd-params').foo);
+	assert.equal(1234, cxt2.get('params-testCmd').foo);
 })
 
 router.handleRequest('testContext', cxt2);

@@ -16,11 +16,13 @@ TestCommand.prototype.execute = function(cxt, params) {
 	this.params = params;
 	
 	// Add params into context for testing later.
-	this.cxt.add(this.name + '-params', params);
+	//this.cxt.add(this.name + '-params', params);
+	this.store(params, 'params');
 	
-	this.cxt.add(this.name, 'ok');
+	//this.cxt.add(this.name, 'ok');
+	this.store('ok');
 	
-	//this.done();
+	this.done();
 }
 
 function FailingCommand() {}
@@ -36,4 +38,6 @@ LogCommand.prototype.execute = function(cxt, params) {
 	var level = params.level || 'debug';
 	
 	cxt.log(msg, level);
+	
+	this.done();
 }

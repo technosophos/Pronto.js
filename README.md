@@ -89,7 +89,7 @@ Pronto is currently pre-release. We will add `npm` packages as soon as it stabil
 
 ## Acknowledgements
 
-* Tom Derykere coined the name for this module.
+* Tom Derykere coined the name for this package.
 * Alex Daw and Sam Boyer provided input at the outset.
 * Some of the patterns are derived from [Fortissimo](http://github.com/technosophos/Fortissimo).
 

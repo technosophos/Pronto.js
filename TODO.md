@@ -15,7 +15,6 @@ Registry:
 
 HTTPServer:
 
-- FIXME: Need to convert cxt.request/cxt.response to datasources.
 - Figure out a good unit testing solution
 - Add Cookie data handling
 
@@ -25,7 +24,6 @@ CLI:
 
 Context:
 
-- Datasources: Refactor?
 - Caches: Add a caching mechanism to context.
 
 Commands:

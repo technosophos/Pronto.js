@@ -1,9 +1,12 @@
 TODO:
 
+CommandList:
+
+- Needs to be rebuilt as a Generator.
+
 Router:
 
 - Add @route internal routes
-- Add route parsing.
 
 Registry:
 
@@ -15,7 +18,6 @@ HTTPServer:
 - FIXME: Need to convert cxt.request/cxt.response to datasources.
 - Figure out a good unit testing solution
 - Add Cookie data handling
-- Add a path datasource
 
 CLI:
 

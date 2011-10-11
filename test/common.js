@@ -20,9 +20,8 @@ TestCommand.prototype.execute = function(cxt, params) {
 	this.store(params, 'params');
 	
 	//this.cxt.add(this.name, 'ok');
-	this.store('ok');
-	
-	this.done();
+	//this.store('ok');
+	this.done('ok');
 }
 
 function FailingCommand() {}
@@ -39,5 +38,5 @@ LogCommand.prototype.execute = function(cxt, params) {
 	
 	cxt.log(msg, level);
 	
-	this.done();
+	this.done(msg);
 }

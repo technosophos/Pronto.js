@@ -27,7 +27,7 @@ router.on('exec', function (spec, context) {
 
 // This should have fired when the chain completed.
 var doneWasFired = false;
-router.on('done', function (context) {
+router.on('postExec', function (context) {
 	assert.ok(context instanceof pronto.Context);
 	
 	doneWasFired = true;
@@ -41,11 +41,18 @@ router.on('commandContinue', function(spec, cxt) {
 	commandContinueFired = true;
 })
 
+// Test wheter CommandListComplete works.
+var commandListCompleteFired = 0;
+router.on('commandListComplete', function() {
+	commandListCompleteFired++;
+});
+
 router.handleRequest('foo');
 
 assert.ok(execWasFired, '"exec" event must be executed.');
-assert.ok(doneWasFired, '"done" event must be executed.');
+assert.ok(doneWasFired, '"postExec" event must be executed.');
 assert.ok(commandContinueFired, '"commandContinue" event executed at least once.');
+assert.equal(1, commandListCompleteFired, '"commandListComplete" should be fired ONLY once.');
 
 // Test the error handling.
 register.request('failure').does(common.FailingCommand, 'fails');
@@ -66,7 +73,7 @@ register.request('foo3')
 		.using('foo2', 'bar2');
 router.setRegistry(register);
 
-router.once('done', function(cxt) {
+router.once('commandListComplete', function(cxt) {
 	doneFired = true;
 	//console.log(cxt);
 	assert.ok(cxt.get('test-command-params'), 'Should be a context');
@@ -74,14 +81,14 @@ router.once('done', function(cxt) {
 	assert.equal('bar2', cxt.get('test-command-params').foo2);
 })
 router.handleRequest('foo3');
-assert.ok(doneFired, 'Done event should fire on request completion.');
+assert.ok(doneFired, 'commandListComplete event should fire on request completion.');
 
 // Test passing a context into router:
 register.request('testContext').does(common.TestCommand, 'testCmd').using('foo').from('get:q');
 var cxt2 = new pronto.Context();
 cxt2.addDatasource('get', {'q': 1234});
 testContextFired = false;
-router.once('done', function(cxt) {
+router.once('commandListComplete', function(cxt) {
 	testContextFired = true;
 	assert.equal(1234, cxt2.get('testCmd-params').foo);
 })

@@ -1,12 +1,8 @@
 TODO:
 
-CommandList:
-
-- Needs to be rebuilt as a Generator.
-
 Router:
 
-- Add @route internal routes
+- Add @route internal routes (taint mode)
 
 Registry:
 
@@ -31,3 +27,8 @@ Commands:
 - AddToContext
 - RemoveFromContext
 - Cookie encoding?
+
+CommandList:
+
+- Needs to be rebuilt as a Generator.
+

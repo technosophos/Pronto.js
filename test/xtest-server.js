@@ -1,5 +1,6 @@
 var pronto = require('../lib/pronto');
 var FAIL = require('./common').FailingCommand;
+var LogCommand = require('./common').LogCommand;
 var assert = require('assert');
 var client = require('http');
 
@@ -24,28 +25,26 @@ register
 	.using('code', 404)
 	.using('contentType', 'text/markdown')
 	.using('body', 'Bork bork bork.')
-	
+
+.request('@serverStartup')
+	.does(LogCommand, 'start')
+		.using('msg', 'Starting up')
+		.using('level', 'info')
+		
+.request('@serverShutdown')
+	.does(LogCommand, 'stop')
+		.using('msg', 'Shutting down')
+		.using('level', 'info')
 ;
 	
 var cxt = new pronto.Context();
 cxt.add('base-item', 'test');
 
 var server = pronto.HTTPServer.createServer(register, cxt);
+
+server.on('close', function() {console.log('close')});
+
 server.listen(8000, 'localhost');
 
-//require('repl').start().context.register = register;
-/*
-var clientOpts = {
-	host: 'localhost'
-	,port: 8000
-	,method: 'GET'
-	,path: '/test'
-};
-
-client.request(clientOpts, function(res) {
-	res.on('data', function (data) {console.log(data)});
-	
-});
-
-server.close();
-*/
+// Test close()
+//setTimeout(function(){server.close()}, 2000);

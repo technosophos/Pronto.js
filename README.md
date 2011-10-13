@@ -29,7 +29,7 @@ Pronto provides a fluent interface for declaring your task list. Here is a simpl
 
 ```javascript
     var register = new pronto.Registry();
-    register.request('hello')
+    register.route('hello')
       .doesCommand(HelloCommand, 'print-hello');
 ```
 
@@ -38,7 +38,7 @@ The above registers a single request (`hello`). Executing the `hello` request wi
 More often than not, a request executes multiple commands in a row, systematically assembling data and returning it only at the end. For example, a simple search engine request might look like this:
 
 ```javascript
-    register.request('search')
+    register.route('search')
       .does(InitializeSearchService, 'initialization')
       .does(QueryRemoteSearchService, 'do-search')
         .uses('query').from('get:q')
@@ -89,7 +89,7 @@ Pronto is currently pre-release. We will add `npm` packages as soon as it stabil
 
 ## Acknowledgements
 
-* Tom Derykere coined the name for this package.
+* Tom Deryckere coined the name for this package.
 * Alex Daw and Sam Boyer provided input at the outset.
 * Some of the patterns are derived from [Fortissimo](http://github.com/technosophos/Fortissimo).
 

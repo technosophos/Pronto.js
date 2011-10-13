@@ -1,5 +1,9 @@
 TODO:
 
+BUGS:
+
+- The path resolver for CommandList.constructCommand is not working.
+
 Router:
 
 - Add @route internal routes (taint mode)

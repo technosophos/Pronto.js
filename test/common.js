@@ -3,6 +3,7 @@ pronto = require('../lib/pronto');
 exports.TestCommand = TestCommand;
 exports.FailingCommand = FailingCommand;
 exports.LogCommand = LogCommand;
+exports.ErrorThrowingCommand = ErrorThrowingCommand;
 
 
 // FIXTURE: Simple test command.
@@ -28,6 +29,12 @@ function FailingCommand() {}
 util.inherits(FailingCommand, pronto.Command);
 FailingCommand.prototype.execute = function(cxt, params) {
 	this.emit('error', new Error('I feel sick.'));
+}
+
+function ErrorThrowingCommand() {}
+pronto.inheritsCommand(ErrorThrowingCommand);
+ErrorThrowingCommand.prototype.execute = function(cxt, params) {
+	throw new Error('Throw me');
 }
 
 function LogCommand() {}

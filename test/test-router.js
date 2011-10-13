@@ -55,10 +55,21 @@ assert.ok(commandContinueFired, '"commandContinue" event executed at least once.
 assert.equal(1, commandListCompleteFired, '"commandListComplete" should be fired ONLY once.');
 
 // Test the error handling.
-register.request('failure').does(common.FailingCommand, 'fails');
+register.request('failure')
+  .does(common.TestCommand, 'test-command')
+  .does(common.FailingCommand, 'fails');
 
 router = new pronto.Router(register);
 assert.throws(function() {router.handleRequest('failure')}, /I feel sick/, "Catch error event");
+
+// Test throwing an error in a command.
+register.request('failure')
+  .does(common.TestCommand, 'test-command')
+  .does(common.ErrorThrowingCommand, 'fails');
+
+router = new pronto.Router(register);
+assert.throws(function() {router.handleRequest('failure')}, /Throw me/, "Catch error event");
+
 
 // Test a failed route:
 var wasNotFoundFired = false;

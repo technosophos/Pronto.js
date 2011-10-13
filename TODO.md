@@ -3,6 +3,7 @@ TODO:
 BUGS:
 
 - The path resolver for CommandList.constructCommand is not working.
+- In some cases, an 'error' event may come back 'Error: undefined' and hang the router.
 
 Router:
 

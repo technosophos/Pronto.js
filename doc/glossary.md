@@ -1,4 +1,4 @@
-# Glossary of Presto Terms
+# Glossary of Pronto Terms
 
   Chain of Command (List of Tasks):
   
@@ -48,7 +48,7 @@
 
   HTTPServer:
   
-    Presto extends the Node.js HTTP server. The Presto version uses a 
+    Pronto extends the Node.js HTTP server. The Pronto version uses a 
     registry to build a new router, and then routes HTTP requests 
     accordingly.
 

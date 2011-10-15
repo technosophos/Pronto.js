@@ -19,15 +19,15 @@ var rname = router.resolveRequest('foo');
 assert.equal('foo', rname, 'Request name should be "foo".');
 
 var execWasFired = false;
-router.on('exec', function (spec, context) {
+router.on('commandsStart', function (spec, context) {
 	assert.ok(context instanceof pronto.Context);
 	//assert.ok(spec instanceof StinkyCheese);
 	execWasFired = true;
 });
 
-// This should have fired when the chain completed.
+// This should have fired when the chain loader has started the chain.
 var doneWasFired = false;
-router.on('postExec', function (context) {
+router.on('commandsLaunched', function (context) {
 	assert.ok(context instanceof pronto.Context);
 	
 	doneWasFired = true;
@@ -49,10 +49,10 @@ router.on('commandListComplete', function() {
 
 router.handleRequest('foo');
 
-assert.ok(execWasFired, '"exec" event must be executed.');
-assert.ok(doneWasFired, '"postExec" event must be executed.');
+assert.ok(execWasFired, '"commandsStart" event must be executed.');
+assert.ok(doneWasFired, '"commandsLaunched" event must be executed.');
 assert.ok(commandContinueFired, '"commandContinue" event executed at least once.');
-assert.equal(1, commandListCompleteFired, '"commandListComplete" should be fired ONLY once.');
+assert.equal(1, commandListCompleteFired, '"commandListComplete" should be fired ONLY once. Was fired ' + commandListCompleteFired);
 
 // Test the error handling.
 register.request('failure')
@@ -106,17 +106,3 @@ router.once('commandListComplete', function(cxt) {
 
 router.handleRequest('testContext', cxt2);
 assert.ok(testContextFired, 'Context test fired.');
-
-// Testing router depth:
-
-register
-.request('depth')
-  .does(common.TestCommand)
-  .does(common.DumpStack, 1)
-  .does(common.DumpStack, 2)
-  .does(common.DumpStack)
-  .does(common.DumpStack)
-  .does(common.DumpStack)
-  
-
-router.handleRequest('depth');

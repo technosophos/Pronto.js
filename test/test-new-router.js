@@ -51,3 +51,13 @@ router.handleRequest('teststop');
 assert.equal(1, completed);
 assert.equal(1, stopped);
 assert.equal(1, rerouted);
+
+//Test from-resolver
+var cxt = new pronto.Context();
+cxt.add('FOO', 1234);
+assert.equal(1234, router.resolveFromSpec('c:FOO', cxt));
+assert.equal(1234, router.resolveFromSpec('cxt:FOO', cxt));
+assert.equal(1234, router.resolveFromSpec('context:FOO', cxt));
+
+cxt.addDatasource('get', {'test': 4321});
+assert.equal(4321, router.resolveFromSpec('get:test', cxt));

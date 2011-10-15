@@ -22,16 +22,6 @@
     Commands are organized into chains of commands, and are executed
     in a command list.
 
-  Command List:
-  
-    The Command List (commandlist) is responsible for running a chain 
-    of commands. A command list is always managed by the router.
-    
-    The command list uses the Node.js event/emitter model to pass control
-    from command to command as the chain is processed. Each command is
-    created, executed, and then left to do its processing until it 
-    triggers an event notifying the system that it is done. Then the
-    next command in the chain is executed.
 
   Context:
   

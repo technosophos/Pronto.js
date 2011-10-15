@@ -35,5 +35,5 @@ Commands:
 
 CommandList:
 
-- Needs to be rebuilt as a Generator.
+- When a command emits an interrupt, the commandList should stop processing.
 

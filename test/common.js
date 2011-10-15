@@ -4,7 +4,7 @@ exports.TestCommand = TestCommand;
 exports.FailingCommand = FailingCommand;
 exports.LogCommand = LogCommand;
 exports.ErrorThrowingCommand = ErrorThrowingCommand;
-
+exports.DumpStack = DumpStack;
 
 // FIXTURE: Simple test command.
 function TestCommand() {
@@ -46,4 +46,13 @@ LogCommand.prototype.execute = function(cxt, params) {
 	cxt.log(msg, level);
 	
 	this.done(msg);
+}
+
+function DumpStack(){}
+pronto.inheritsCommand(DumpStack);
+DumpStack.prototype.execute = function (cxt, params) {
+  console.log(this.name);
+  e = new Error('ds');
+  console.log(e.stack);
+  this.done();
 }

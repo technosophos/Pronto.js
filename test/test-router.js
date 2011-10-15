@@ -107,3 +107,16 @@ router.once('commandListComplete', function(cxt) {
 router.handleRequest('testContext', cxt2);
 assert.ok(testContextFired, 'Context test fired.');
 
+// Testing router depth:
+
+register
+.request('depth')
+  .does(common.TestCommand)
+  .does(common.DumpStack, 1)
+  .does(common.DumpStack, 2)
+  .does(common.DumpStack)
+  .does(common.DumpStack)
+  .does(common.DumpStack)
+  
+
+router.handleRequest('depth');

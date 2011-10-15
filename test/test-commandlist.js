@@ -49,11 +49,13 @@ clist.rewind();
 
 cxt = new pronto.Context();
 
+/*
 clist.run(cxt);
 
 // Check that all commands are run.
 assert.equal('ok', cxt.get('test-command'), 'Assert that first test command returned correctly.');
 assert.equal('ok', cxt.get('test-command2'), 'Assert that second test command returned correctly.');
+*/
 
 
 //Test from-resolver

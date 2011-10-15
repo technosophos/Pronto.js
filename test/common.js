@@ -5,6 +5,8 @@ exports.FailingCommand = FailingCommand;
 exports.LogCommand = LogCommand;
 exports.ErrorThrowingCommand = ErrorThrowingCommand;
 exports.DumpStack = DumpStack;
+exports.ReRoute = ReRoute;
+exports.Stop = Stop;
 
 // FIXTURE: Simple test command.
 function TestCommand() {
@@ -55,4 +57,19 @@ DumpStack.prototype.execute = function (cxt, params) {
   e = new Error('ds');
   console.log(e.stack);
   this.done();
+}
+
+function ReRoute(){}
+pronto.inheritsCommand(ReRoute);
+ReRoute.prototype.execute = function (cxt, params) {
+  var routeTo = params.routeTo || '/test';
+  console.log('Rerouting to ' + routeTo);
+  this.emit('reroute', routeTo, cxt);
+}
+
+function Stop(){}
+pronto.inheritsCommand(Stop);
+Stop.prototype.execute = function (cxt, params) {
+  console.log('Stopping');
+  this.emit('stop', cxt);
 }

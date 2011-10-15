@@ -108,7 +108,7 @@ router.handleRequest('testContext', cxt2);
 assert.ok(testContextFired, 'Context test fired.');
 
 // Testing router depth:
-
+/*
 register
 .request('depth')
   .does(common.TestCommand)
@@ -117,6 +117,6 @@ register
   .does(common.DumpStack)
   .does(common.DumpStack)
   .does(common.DumpStack)
-  
-
+;
 router.handleRequest('depth');
+*/

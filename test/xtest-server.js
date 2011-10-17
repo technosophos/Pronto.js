@@ -3,6 +3,7 @@ var FAIL = require('./common').FailingCommand;
 var LogCommand = require('./common').LogCommand;
 var assert = require('assert');
 var client = require('http');
+var common = require('./common');
 
 var register = new pronto.Registry();
 
@@ -35,6 +36,32 @@ register
 	.does(LogCommand, 'stop')
 		.using('msg', 'Shutting down')
 		.using('level', 'info')
+		
+// Copied from new router test.
+.request('/depth')
+  //.does(common.TestCommand)
+  .does(common.DumpStack, 1)
+  .does(common.DumpStack, 2)
+  .does(common.DumpStack, 3)
+  .does(common.DumpStack, 4)
+  .does(common.DumpStack, 5)
+  .does('../lib/commands/HTTPResponse', 'out')
+	.using('code', 200)
+	.using('contentType', 'text/markdown')
+	.using('body', 'You did alright.')
+	
+.request('targetroute')
+  .does('../lib/commands/HTTPResponse', 'out')
+	.using('code', 200)
+	.using('contentType', 'text/markdown')
+	.using('body', 'I am target route.')
+	
+.request('/testreroute')
+  .does(common.ReRoute, 'shouldreroute').using('routeTo', 'targetroute')
+  .does(common.ErrorThrowingCommand)
+.request('/teststop')
+  .does(common.Stop, 'shouldStop')
+  .does(common.ErrorThrowingCommand)
 ;
 	
 var cxt = new pronto.Context();

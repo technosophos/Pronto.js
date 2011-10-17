@@ -64,12 +64,13 @@ pronto.inheritsCommand(ReRoute);
 ReRoute.prototype.execute = function (cxt, params) {
   var routeTo = params.routeTo || '/test';
   console.log('Rerouting to ' + routeTo);
-  this.emit('reroute', routeTo, cxt);
+  this.reroute(routeTo, cxt);
 }
 
 function Stop(){}
 pronto.inheritsCommand(Stop);
 Stop.prototype.execute = function (cxt, params) {
   console.log('Stopping');
-  this.emit('stop', cxt);
+  //this.emit('stop', cxt);
+  this.stop(cxt);
 }

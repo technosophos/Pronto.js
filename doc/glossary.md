@@ -44,13 +44,18 @@
 
   Registry:
   
-    Links a request name to a chain of commands. This is basically a 
+    Links a route name to a chain of commands. This is basically a 
     configuration object.
 
   Resolver:
   
     Given some source of user input (e.g. a URL), looks up the URL to find out the
     appropriate request name. The router relies on the resolver for this service.
+
+  Route:
+  
+    A route maps a name (the route name) to a chain of commands. A new route is
+    created by adding a route to the registry.
 
   Router:
   

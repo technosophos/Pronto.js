@@ -106,3 +106,8 @@ router.once('commandListComplete', function(cxt) {
 
 router.handleRequest('testContext', cxt2);
 assert.ok(testContextFired, 'Context test fired.');
+
+// Test taint mode:
+register.route('@internal').does(common.TestCommand);
+assert.throws(function(){router.handleRequest('@internal', cxt, true)}, '/taint/');
+router.handleRequest('@internal');

@@ -8,17 +8,17 @@ var register = new pronto.Registry();
 var c = pronto.register.config;
 
 // Register just a request. CANARY. Remove this, as it is testing an invalid state.
-pronto.register.request('foo');
+pronto.register.route('foo');
 assert.ok(c.requests['foo'] != undefined, 'Request should have been created.');
 */
 
 // Register one command
-register.request('bar').does(common.TestCommand, 'test-command');
+register.route('bar').does(common.TestCommand, 'test-command');
 assert.ok(register.config.requests['bar'] != undefined, 'Request should have been created.');
 assert.equal(1, register.config.requests.bar.length, 'Request should have one command.');
 
 // Register two commands
-register.request('bar')
+register.route('bar')
   .does(common.TestCommand,'test-command')
 	.does(common.TestCommand, 'test-command2')
 ;
@@ -29,7 +29,7 @@ assert.equal('test-command2', register.config.requests.bar[1].name, 'Command nam
 assert.equal(common.TestCommand, register.config.requests.bar[0].command, 'Check that command is correct.');
 
 // Test setting values for params.
-register.request('withArgs')
+register.route('withArgs')
 	.does(common.TestCommand, 'test-command')
 		.using('myParam', 'test value')
 	.does(common.TestCommand, 'test-command2')
@@ -56,3 +56,28 @@ assert.equal('test value', spec[0].params.myParam.value, 'Test that default valu
 // Check that an Error is thrown when a nonexistenc request spec is fetched.
 
 assert.throws(function() {registry.getRequestSpec('NoSuchRequestName');console.log('foo')}, '/No Sflurp request/', 'Should throw an exception if no requst is found.')
+
+
+// Test registry includes() failure:
+assert.throws(function() {register.route('a').includes('b')}, '/Cannot include undefined route/');
+assert.throws(function() {register.route('a').includes('a')}, '/vicious/');
+
+
+// Test registry includes().
+register
+.route('includeMe')
+  .does(common.TestCommand, 'two')
+  .does(common.TestCommand, 'three')
+.route('includeMeTest')
+  .does(common.TestCommand, 'one')
+  .includes('includeMe')
+  .does(common.TestCommand, 'four')
+  .does(common.TestCommand, 'five')
+;
+
+spec = register.getRequestSpec('includeMeTest');
+
+assert.ok(spec);
+assert.equal(spec[0].name, 'one');
+assert.equal(spec[2].name, 'three');
+assert.equal(spec[3].name, 'four');

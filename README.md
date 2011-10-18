@@ -95,6 +95,10 @@ Pronto is currently pre-release. We will add `npm` packages as soon as it stabil
 
 This project was sponsored by [ConsumerSearch.com](http://www.consumersearch.com), part of the About.Com network, a New York Times company.
 
+## Related Packages
+
+* [Pronto-MongoDB](https://github.com/technosophos/Pronto-MongoDB): MongoDB commands for Pronto.
+
 ## License
 
 Pronto.js is made available under an MIT-style license.

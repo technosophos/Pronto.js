@@ -62,6 +62,8 @@
     Given a request (or a request name), the router resolves a request name
     (using a resolver), gets the spec for how that request should be executed,
     and then begins the execution of that request.
-  
+ 
+ MVC:
+   http://geekandpoke.typepad.com/geekandpoke/2010/06/hello-world.html 
   
 

@@ -81,3 +81,16 @@ assert.ok(spec);
 assert.equal(spec[0].name, 'one');
 assert.equal(spec[2].name, 'three');
 assert.equal(spec[3].name, 'four');
+
+// Test help system.
+
+register = new pronto.Registry();
+register
+.route('TestOne', "this is help text").does(common.TestCommand)
+.route('TestTwo', {msg: "this is also help text"}).does(common.TestCommand)
+.route('NoHelp').does(common.TestCommand)
+;
+
+assert.equal(register.getHelp('TestOne').msg, "this is help text");
+assert.equal(register.getHelp('TestTwo').msg, "this is also help text");
+assert.equal(0, register.getHelp('NoHelp').msg.length);

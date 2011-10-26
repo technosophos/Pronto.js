@@ -2,7 +2,7 @@
   "name": "pronto",
   "description": "Application building framework",
   "keywords": ["framework", "web", "server", "command"],
-  "version": "0.1.6",
+  "version": "0.2.0",
   "author": "Matt Butcher <technosophos@gmail.com>",
   "contributors": [
     {"name": "Matt Butcher", "email": "technosophos@gmail.com"}

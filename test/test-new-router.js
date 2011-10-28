@@ -36,8 +36,9 @@ router.on('commandListComplete', function(cxt){
   console.log('complete');
   ++completed;
 });
-router.on('commandListInterrupted', function (cxt) {
-  console.log(cxt);
+router.on('commandListInterrupted', function (r, spec, cxt) {
+  console.log(r);
+  //console.log('stopped')
   ++stopped;
 });
 router.on('reroute', function (routeName, cxt) {

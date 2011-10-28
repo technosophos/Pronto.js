@@ -62,8 +62,15 @@
     Given a request (or a request name), the router resolves a request name
     (using a resolver), gets the spec for how that request should be executed,
     and then begins the execution of that request.
- 
- MVC:
-   http://geekandpoke.typepad.com/geekandpoke/2010/06/hello-world.html 
   
+  Separation of Concerns
+    
+    The overall design theory that each "concern" (particular functional unit) of
+    an app should be implemented in a separate component. Pronto's command structure
+    is an intense version of SoC: Each command should manage ONE task, and do it
+    well.
+ 
+  MVC:
+   http://geekandpoke.typepad.com/geekandpoke/2010/06/hello-world.html 
+   http://fabien.potencier.org/article/49/what-is-symfony2
 

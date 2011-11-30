@@ -2,6 +2,14 @@
 
 Pronto is a Node.js library for building very fast applications. Create a request, assign it a list of commands to execute, and then run it.
 
+Pronto is a great fit for:
+
+* Web apps
+* JSON servers
+* Configurable command-line tools
+
+[Documentation](https://github.com/technosophos/Pronto.js/wiki)
+
 ## Airplane View
 
 Pronto.js is a simple tool for executing a sequence of tasks. It looks declarative -- you create a list -- but in the background, Pronto takes full advantage of Node's event model. The result is that you can easily write very fast code.
@@ -85,13 +93,16 @@ The above simply prints `Hello World` to the console.
 
 ## Development Status
 
-Pronto is currently pre-release. We will add `npm` packages as soon as it stabilizes.
+While we're pre-1.0, the Pronto project is fairly stable, now, and has
+NPM packages.
 
 ## Acknowledgements
 
 * Tom Deryckere coined the name for this package.
 * Alex Daw and Sam Boyer provided input at the outset.
 * Some of the patterns are derived from [Fortissimo](http://github.com/technosophos/Fortissimo).
+* Huge thanks to [ConsumerSearch.com](http://consumersearch.com) for
+  continued work.
 
 This project was sponsored by [ConsumerSearch.com](http://www.consumersearch.com), part of the About.Com network, a New York Times company.
 

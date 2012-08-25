@@ -1,6 +1,7 @@
 var assert = require('assert');
 var pronto = require('../lib/pronto');
-var JSONEncode = require('../lib/commands/jsonencode');
+//var JSONEncode = require('../lib/commands/jsonencode');
+var JSONEncode = pronto.commands.JSONEncode;
 
 var reg = new pronto.Registry();
 var cxt = new pronto.Context();

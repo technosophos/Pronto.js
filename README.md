@@ -22,6 +22,9 @@ Pronto encourages you to do the following:
 
 And while you focus on building small parts and chaining them together, Pronto handles the "eventing", feeding the application to Node as a fully evented sequence. This allows Node to execute your application at full speed -- even under load.
 
+You can take a look at a sample Pronto project here:
+[https://github.com/technosophos/pronto-example](https://github.com/technosophos/pronto-example)
+
 ## Getting Started
 
 There are only two things you need to know how to do:

@@ -24,7 +24,7 @@ register
 .request('@404')
 	.does(pronto.commands.HTTPResponse, 'out')
 	.using('code', 404)
-	.using('contentType', 'text/markdown')
+	.using('contentType', 'text/plain')
 	.using('body', 'Bork bork bork.')
 
 .request('@serverStartup')

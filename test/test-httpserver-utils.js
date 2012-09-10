@@ -13,7 +13,7 @@ var request = {
 	method: 'POST'
 };
 
-pronto.HTTPServer.ServerImpl.parseRequestBody(request, cxt, testPOST);
+pronto.HTTPServer.HTTPServerUtils.parseRequestBody(request, cxt, testPOST);
 
 // Test form encoded data.
 assert.ok(cxt.getDatasource('post'), 'There should be a POST datasource.');
@@ -26,7 +26,7 @@ assert.equal(23, pData.Age, "Test value of Age in POST data");
 cxt = new pronto.Context();
 request.headers['Content-Type'] = 'application/json';
 
-pronto.HTTPServer.ServerImpl.parseRequestBody(request, cxt, testJSON);
+pronto.HTTPServer.HTTPServerUtils.parseRequestBody(request, cxt, testJSON);
 assert.ok(cxt.getDatasource('post'), 'There should be a JSON datasource.');
 var pData = cxt.getDatasource('post');
 assert.equal('Jonathan Doe', pData.Name, "Test value of Name in parsed JSON.");

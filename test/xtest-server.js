@@ -47,13 +47,13 @@ register
   .does(common.DumpStack, 5)
   .does(pronto.commands.HTTPResponse, 'out')
 	.using('code', 200)
-	.using('contentType', 'text/markdown')
+	.using('contentType', 'text/plain')
 	.using('body', 'You did alright.')
 	
 .request('targetroute')
   .does(pronto.commands.HTTPResponse, 'out')
 	.using('code', 200)
-	.using('contentType', 'text/markdown')
+	.using('contentType', 'text/plain')
 	.using('body', 'I am target route.')
 	
 .request('/testreroute')

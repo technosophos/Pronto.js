@@ -3,6 +3,7 @@ var FAIL = require('./common').FailingCommand;
 var LogCommand = require('./common').LogCommand;
 var assert = require('assert');
 var client = require('http');
+var fs = require('fs');
 var common = require('./common');
 
 var register = new pronto.Registry();
@@ -64,7 +65,12 @@ register
   .does(common.ErrorThrowingCommand)
 ;
 	
-var cxt = new pronto.Context();
+//var cxt = new pronto.Context();
+var cxt = new pronto.Context({
+  ssl: false,
+  sslKey: fs.readFileSync('test/ssl/pronto-test-key.pem'),
+  sslCertificate: fs.readFileSync('test/ssl/pronto-test-cert.pem')
+});
 cxt.add('base-item', 'test');
 
 var server = pronto.HTTPServer.createServer(register, cxt);

@@ -10,11 +10,11 @@ var register = new pronto.Registry();
 register
 
 .request('/test')
-	.does('../lib/commands/HTTPResponse', 'out')
+	.does(pronto.commands.HTTPResponse, 'out')
 	.using('body', 'This is a test.')
 
 .request('/test/*/test')
-	.does('../lib/commands/HTTPResponse', 'out')
+	.does(pronto.commands.HTTPResponse, 'out')
 	.using('body', 'This is a test.').from('path:1')
 
 .request('/fail')
@@ -22,7 +22,7 @@ register
 	.using('body', 'This is a test.')
 	
 .request('@404')
-	.does('../lib/commands/HTTPResponse', 'out')
+	.does(pronto.commands.HTTPResponse, 'out')
 	.using('code', 404)
 	.using('contentType', 'text/markdown')
 	.using('body', 'Bork bork bork.')
@@ -45,13 +45,13 @@ register
   .does(common.DumpStack, 3)
   .does(common.DumpStack, 4)
   .does(common.DumpStack, 5)
-  .does('../lib/commands/HTTPResponse', 'out')
+  .does(pronto.commands.HTTPResponse, 'out')
 	.using('code', 200)
 	.using('contentType', 'text/markdown')
 	.using('body', 'You did alright.')
 	
 .request('targetroute')
-  .does('../lib/commands/HTTPResponse', 'out')
+  .does(pronto.commands.HTTPResponse, 'out')
 	.using('code', 200)
 	.using('contentType', 'text/markdown')
 	.using('body', 'I am target route.')

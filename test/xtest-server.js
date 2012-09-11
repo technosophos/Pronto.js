@@ -32,6 +32,12 @@ register
 	.does(LogCommand, 'start')
 		.using('msg', 'Starting up')
 		.using('level', 'info')
+  .does(pronto.commands.SPrintF, 'ssl')
+    .using('format', 'Using SSL: %s')
+    .using(1, false).from('cxt:ssl')
+  .does(LogCommand, 'info')
+		.using('msg').from('cxt:ssl')
+		.using('level', 'info')
 		
 .request('@serverShutdown')
 	.does(LogCommand, 'stop')

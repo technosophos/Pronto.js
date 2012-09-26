@@ -1,10 +1,13 @@
 var pronto = require('../lib/pronto');
-var FAIL = require('./common').FailingCommand;
-var LogCommand = require('./common').LogCommand;
+var ConsoleLogger = require('../lib/logging').ConsoleLogger;
+
+var common = require('./common');
+var FAIL = common.FailingCommand;
+var LogCommand = common.LogCommand;
+
 var assert = require('assert');
 var client = require('http');
 var fs = require('fs');
-var common = require('./common');
 
 var register = new pronto.Registry();
 
@@ -78,6 +81,8 @@ var cxt = new pronto.Context({
   sslCertificate: fs.readFileSync('test/ssl/pronto-test-cert.pem')
 });
 cxt.add('base-item', 'test');
+
+new ConsoleLogger(cxt.logger);
 
 var server = pronto.HTTPServer.createServer(register, cxt);
 

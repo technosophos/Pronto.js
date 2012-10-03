@@ -12,5 +12,5 @@
   "scripts": {
     "test": "make test"
   },
-  "engines": {"node": ">= 0.4.9 < 0.8.0"}
+  "engines": {"node": ">= 0.4.9 < 1.0.0"}
 }

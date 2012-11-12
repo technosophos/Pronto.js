@@ -4,6 +4,8 @@ Release notes, beginning with 0.3.11
 
 ## 0.3.13
 
+* Added StreamedHTTPResponse.
+
 ## 0.3.12
 
 * BufferedReader now correctly handles encoding and decoding of buffers.

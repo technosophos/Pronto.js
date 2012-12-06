@@ -2,9 +2,11 @@
 
 Release notes, beginning with 0.3.11
 
+
 ## 0.3.13
 
 * Added StreamedHTTPResponse.
+* Added AddToContext.
 
 ## 0.3.12
 

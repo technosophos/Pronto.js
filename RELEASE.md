@@ -4,6 +4,10 @@ Release notes, beginning with 0.3.11
 
 ## 0.3.14
 
+* Fixed an error in HTTP error handling. This error was temporarily
+stopping the event loop from answering requests when an uncaught
+exception was handled by the HTTP server.
+
 ## 0.3.13
 
 * Added StreamedHTTPResponse.

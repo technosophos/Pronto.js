@@ -2,6 +2,8 @@
 
 Release notes, beginning with 0.3.11
 
+## 0.3.15
+
 ## 0.3.14
 
 * Fixed an error in HTTP error handling. This error was temporarily
